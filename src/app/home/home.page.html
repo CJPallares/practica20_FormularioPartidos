@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Partidos
+      Resultados Partidos
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -19,6 +19,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
       <div formGroupName="grupoEquipos">
         <ion-row>
           <!--en pantallas pequeñas los dos equipos salen uno debajo del otro
@@ -35,7 +36,7 @@
           </ion-col>
           <ion-col size="12" size-md="6">
             <ion-item>
-              <ion-label position="floating" color="primary">Equipo Visitante:</ion-label>
+              <ion-label position="floating" color="success">Equipo Visitante:</ion-label>
               <ion-select formControlName="equipoVisitante" (ionChange)="onChangeEquipoVisitante($event)">
                 <ion-select-option *ngFor="let equipo of equipos" [value]="equipo">
                       {{equipo.equipo}}
@@ -45,6 +46,7 @@
           </ion-col>
         </ion-row>
       </div> <!--End div grupoEquipos-->
+
       <div *ngIf="grupoEquipos.valid"> <!--div seccion 2-->
           
         <!--el resultado sale siempre en una fila-->
@@ -62,20 +64,21 @@
           <ion-col size="1" class="ion-align-self-center" style="font-size:20px;text-align:center;">
             -
           </ion-col>
-          <ion-col size="4">
-            
+          <ion-col size="4"> 
             <ion-item>
               <ion-input class="ion-text-end" type="number" formControlName="golesVisitante" min=0></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
+
         <ion-row>
           <ion-col size="12" size-md="6">
             <ion-item>
               <h1>Alineación {{equipoLocal}}</h1>
             </ion-item>
             <ion-item-sliding *ngFor="let jugador of jugadoresLocal; let indice=index">
-              <ion-item>
+  <!-- En cada ciclo del for registra el índice de cada jugador (cada item) para luego poder eliminarlo:-->
+              <ion-item>  
                   {{jugador}}
               </ion-item>
               <ion-item-options>
@@ -85,15 +88,15 @@
               </ion-item-options>
             </ion-item-sliding>
           </ion-col>
+
             <ion-col size="12" size-md="6">
               <ion-item>
                 <h1>Alineación {{equipoVisitante}}</h1>              
               </ion-item>
               <ion-item *ngFor="let jugador of jugadoresVisitante; let indice=index">
                 {{jugador}}
-                <button ion-button icon-only 
-                  (click)="deleteJugadorVisitante(indice)" slot="end">
-                        <ion-icon name="trash"></ion-icon>
+                <button ion-button icon-only (click)="deleteJugadorVisitante(indice)" slot="end">
+                  <ion-icon name="trash"></ion-icon>
                 </button>
               </ion-item>
           </ion-col>  
